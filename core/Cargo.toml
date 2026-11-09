@@ -1,0 +1,29 @@
+[package]
+name = "companion-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Domingo Olmo Martin"]
+license = "MIT"
+description = "Bandua MHL Companion : contrôle de l'intégrité des rushes à partir de leurs MHL (v1.1 et ASC MHL)"
+
+[lib]
+name = "companion_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bandua-mhl-check"
+path = "src/bin/cli.rs"
+
+[dependencies]
+xxhash-rust = { version = "0.8", features = ["xxh32", "xxh64", "xxh3"] }
+md-5 = "0.10"
+sha1 = "0.10"
+sha2 = "0.10"
+walkdir = "2"
+roxmltree = "0.20"
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"

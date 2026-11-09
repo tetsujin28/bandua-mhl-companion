@@ -1,0 +1,58 @@
+name: build
+
+# Se lance :
+#  - à la publication d'une Release sur GitHub (les fichiers y sont alors attachés automatiquement)
+#  - à la main (onglet Actions > build > Run workflow) pour un simple test, sans Release
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            args: ""
+          - os: macos-latest            # binaire universel : Mac Intel + Apple Silicon
+            args: "--target universal-apple-darwin"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Tests du moteur
+        run: cargo test -p companion-core
+      - name: CLI Tauri
+        run: cargo install tauri-cli --version "^2" --locked
+      - name: Build
+        working-directory: src-tauri
+        run: cargo tauri build ${{ matrix.args }}
+      - name: Exe portable Windows
+        if: runner.os == 'Windows'
+        shell: bash
+        run: cp target/release/bandua-mhl-companion.exe "Bandua_MHL_Companion_$(grep -m1 '^version' src-tauri/Cargo.toml | cut -d'"' -f2)_portable.exe"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bandua-mhl-companion-${{ runner.os }}
+          path: |
+            Bandua_MHL_Companion_*_portable.exe
+            target/**/release/bundle/**/*.msi
+            target/**/release/bundle/**/*.exe
+            target/**/release/bundle/**/*.dmg
+      - name: Attacher à la Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            Bandua_MHL_Companion_*_portable.exe
+            target/**/release/bundle/**/*.msi
+            target/**/release/bundle/**/*-setup.exe
+            target/**/release/bundle/**/*.dmg

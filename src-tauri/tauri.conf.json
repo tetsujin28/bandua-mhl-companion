@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Bandua MHL Companion",
+  "mainBinaryName": "bandua-mhl-companion",
+  "version": "0.1.0",
+  "identifier": "com.domingoolmomartin.bandua-mhl-companion",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Bandua MHL Companion",
+        "width": 1180,
+        "height": 780,
+        "minWidth": 940,
+        "minHeight": 620,
+        "theme": "Dark",
+        "backgroundColor": "#0d0e10",
+        "dragDropEnabled": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/icon.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "publisher": "Domingo Olmo Martin",
+    "copyright": "© 2026 Domingo Olmo Martin. MIT License.",
+    "category": "Video",
+    "shortDescription": "Contrôle de l'intégrité des rushes à partir de leurs MHL",
+    "longDescription": "Bandua MHL Companion relit les rushes reçus et les compare à leurs fichiers MHL (MHL 1.1 et ASC MHL) pour indiquer quels fichiers sont abîmés, manquants ou incomplets."
+  }
+}

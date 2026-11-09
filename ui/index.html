@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bandua MHL Companion</title>
+<style>
+:root{
+  --bg:#0d0e10; --panel:#141619; --panel2:#1a1d21; --line:#252930; --line2:#30353d;
+  --text:#e7e9ec; --muted:#8a919b; --dim:#5d636c;
+  --accent:#f0a640; --ok:#35d39a; --err:#f0524f; --warn:#f5c451; --blue:#6cb6ff;
+  --mono:ui-monospace,"JetBrains Mono","SF Mono","Cascadia Mono",Consolas,monospace;
+  --sans:Inter,"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font:13px/1.45 var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.hide{display:none!important}
+.app{display:grid;grid-template-rows:52px 1fr 68px;height:100vh}
+
+/* barre haute */
+header{display:flex;align-items:center;gap:14px;padding:0 18px;border-bottom:1px solid var(--line);background:#0b0c0e}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px;font-size:15px;white-space:nowrap}
+.logo svg{display:block;flex:none}
+.logo em{font-style:normal;font-weight:500;color:var(--accent)}
+.logo small{font-weight:500;font-size:11px;color:var(--dim);letter-spacing:0;margin-left:2px}
+.chip{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
+.chip.run{color:var(--accent);border-color:#5a4220;background:#2a2012}
+.chip.ok{color:var(--ok);border-color:#1f5a44;background:#0f261d}
+.chip.err{color:var(--err);border-color:#5e2524;background:#2a1312}
+header .sp{flex:1}
+.demo{font-size:11px;color:var(--warn);background:#2a2410;border:1px solid #5a4a20;padding:4px 10px;border-radius:6px}
+.lang{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.lang button{padding:5px 9px;font-size:11px;font-weight:700;color:var(--dim);letter-spacing:.5px}
+.lang button.on{background:var(--panel2);color:var(--accent)}
+.lang button:hover{color:var(--text)}
+.ibtn{width:30px;height:30px;border-radius:7px;border:1px solid var(--line);color:var(--muted);font-weight:700;font-family:Georgia,serif;font-style:italic}
+.ibtn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* écran d'accueil */
+main{min-height:0;position:relative}
+.empty{height:100%;display:grid;place-items:center;padding:30px}
+.zone{width:min(720px,100%);border:1.5px dashed var(--line2);border-radius:22px;padding:56px 40px 44px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,#1b1712 0%,var(--panel) 62%);transition:.2s}
+.zone.over{border-color:var(--accent);background:radial-gradient(ellipse at 50% 0%,#2a2012 0%,var(--panel) 70%)}
+.zone .ico{width:88px;height:88px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;
+  background:#0b0c0e;border:1px solid var(--line2);box-shadow:0 0 0 8px #111316}
+.zone h1{font-size:26px;font-weight:800;letter-spacing:-.3px}
+.zone p{color:var(--muted);font-size:13.5px;max-width:520px;margin:10px auto 0;line-height:1.6}
+.zone .btns{display:flex;gap:10px;justify-content:center;margin-top:26px}
+.zone .note{margin-top:26px;font-size:11.5px;color:var(--dim);display:flex;align-items:center;justify-content:center;gap:7px}
+.zone .note:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.zone .err{margin-top:18px;color:var(--err);font-weight:600}
+.zone .err small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+.spin{width:22px;height:22px;border:2.5px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:rot .8s linear infinite;margin:20px auto 0}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* écran de travail */
+.work{display:grid;grid-template-columns:340px 1fr;height:100%}
+.left{border-right:1px solid var(--line);overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:16px}
+h3{font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+h3 small{letter-spacing:0;text-transform:none;font-weight:500;color:var(--dim)}
+h3 button{letter-spacing:0;text-transform:none;font-weight:600;color:var(--dim);font-size:11.5px}
+h3 button:hover{color:var(--accent)}
+.srcbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.path{font-family:var(--mono);font-size:12px;word-break:break-all}
+.stats{display:flex;gap:16px;margin-top:8px;color:var(--muted);font-size:12px}
+.stats b{color:var(--text);font-family:var(--mono);font-weight:600}
+.pk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+.pk.run{border-color:#5a4220}
+.pk.ok{border-color:#1f4a3a}
+.pk.bad{border-color:#5e2524}
+.pk .top{display:flex;align-items:center;gap:8px}
+.pk .nm{font-weight:700;flex:1;min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-all}
+.pk .loc{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl;text-align:left}
+.pk .meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:7px;font-size:11.5px;color:var(--muted)}
+.pk .meta b{font-family:var(--mono);color:var(--text);font-weight:500}
+.pk .warn{margin-top:7px;font-size:11.5px;color:var(--warn)}
+.pk .st{margin-left:auto}
+.pk .pbar{position:absolute;left:0;bottom:0;height:2px;background:var(--accent);transition:width .15s linear}
+.kind{font-size:9.5px;font-weight:800;letter-spacing:.8px;padding:2px 6px;border-radius:4px;background:#22262c;color:#aab1bb;flex:none}
+.kind.ascmhl{background:#13283a;color:var(--blue)}
+
+.right{display:grid;grid-template-rows:auto auto auto 1fr;min-height:0}
+.dash{padding:18px 22px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:136px 1fr;gap:22px;align-items:center}
+.ring{width:136px;height:136px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .pct{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring .pct b{font-size:31px;font-weight:300;font-family:var(--mono);letter-spacing:-1px}
+.ring .pct b i{font-style:normal;font-size:15px;color:var(--muted);margin-left:2px;letter-spacing:0}
+.ring .pct small{display:block;font-size:9.5px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+.ring .pct small.lbl{font-size:8.5px;color:var(--dim)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.m{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.m span{font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.m b{display:block;font-family:var(--mono);font-size:19px;font-weight:500;margin-top:2px;white-space:nowrap}
+.cur{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px}
+.cur b{color:var(--text);font-weight:500}
+.track{height:6px;background:var(--line);border-radius:4px;overflow:hidden}
+.track span{display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .15s linear,background .3s}
+
+.verdict{padding:16px 22px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);animation:up .3s ease-out}
+.verdict .big{font-size:19px;font-weight:800;letter-spacing:.3px}
+.verdict span{color:var(--text);font-size:13px;opacity:.85}
+.verdict.ok{background:linear-gradient(90deg,#0f3a2a,#0d0e10 80%);color:var(--ok)}
+.verdict.err{background:linear-gradient(90deg,#3d1615,#0d0e10 80%);color:var(--err)}
+.verdict.can{background:linear-gradient(90deg,#3a3012,#0d0e10 80%);color:var(--warn)}
+@keyframes up{from{transform:translateY(-6px);opacity:0}}
+
+.tabs{display:flex;gap:4px;padding:10px 18px 0;border-bottom:1px solid var(--line)}
+.tabs button{padding:8px 14px;border-radius:8px 8px 0 0;color:var(--muted);font-weight:600;font-size:12.5px;border:1px solid transparent;border-bottom:0;margin-bottom:-1px}
+.tabs button.on{color:var(--text);background:var(--bg);border-color:var(--line)}
+.tabs button:hover{color:var(--text)}
+.tabs .n{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:10px;font-size:10.5px;font-family:var(--mono);background:var(--panel2);color:var(--muted);text-align:center}
+.tabs .n.err{background:#3a1918;color:var(--err)}
+.tabs .n.warn{background:#2a2410;color:var(--warn)}
+.pane{overflow:auto;min-height:0}
+.placeholder{display:grid;place-items:center;height:100%;color:var(--dim);font-size:13px;text-align:center;padding:30px;line-height:1.6}
+.placeholder.good{color:var(--ok)}
+
+.issue{display:grid;grid-template-columns:104px 1fr auto;gap:14px;align-items:center;padding:12px 22px;border-bottom:1px solid #1b1e22;animation:up .25s ease-out}
+.issue .nm{font-weight:700;font-size:13.5px}
+.issue .nm small{font-weight:500;color:var(--dim);font-size:11px;margin-left:8px}
+.issue .rel{font-family:var(--mono);font-size:11px;color:var(--muted);word-break:break-all;margin-top:2px;user-select:text}
+.issue .why{font-size:12px;color:#c3c8cf;margin-top:4px}
+.issue .hash{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:3px;user-select:text}
+.sbtn{padding:6px 11px;border-radius:7px;border:1px solid var(--line2);color:var(--muted);font-size:12px;font-weight:600}
+.sbtn:hover{color:var(--accent);border-color:var(--accent)}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:10.5px;font-weight:800;letter-spacing:.6px;padding:4px 8px;border-radius:6px;white-space:nowrap}
+.pill:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok);background:#0f261d}
+.pill.corrupt,.pill.missing,.pill.unreadable{color:var(--err);background:#2a1312}
+.pill.size{color:#ff8a5c;background:#2c170f}
+.pill.no_hash{color:var(--warn);background:#2a2410}
+.pill.wait{color:var(--dim);background:var(--panel2)}
+.pill.run{color:var(--accent);background:#2a2012}
+.pill.run:before{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+
+table{width:100%;border-collapse:collapse}
+th{position:sticky;top:0;background:var(--bg);text-align:left;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:700;padding:9px 14px;border-bottom:1px solid var(--line);z-index:1}
+td{padding:8px 14px;border-bottom:1px solid #1b1e22;font-size:12.5px;vertical-align:middle}
+td.mono{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+td.name{font-weight:600}
+td.name small{display:block;font-weight:400;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+tr.bad td{background:#1a1212}
+.brand{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.8px;padding:2px 7px;border-radius:4px}
+.b-RED{background:#3a1416;color:#ff6b6b}.b-ARRI{background:#13283a;color:#6cb6ff}.b-Blackmagic{background:#2e2410;color:#f5b84a}
+.b-Sony,.b-Canon,.b-GoPro,.b-DJI,.b-Générique{background:#22262c;color:#aab1bb}
+.info{padding:12px 22px;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
+.extra{padding:6px 22px;font-family:var(--mono);font-size:11.5px;color:var(--muted);border-bottom:1px solid #16181b;user-select:text}
+
+/* barre basse */
+footer{display:flex;align-items:center;gap:10px;padding:0 18px;border-top:1px solid var(--line);background:#0b0c0e}
+footer .msg{flex:1;color:var(--muted);font-size:12px}
+.go{height:42px;padding:0 28px;border-radius:9px;background:var(--accent);color:#141005;font-weight:800;font-size:14px;letter-spacing:.3px}
+.go:hover{background:#ffb653}
+.go:disabled{background:var(--panel2);color:var(--dim);cursor:not-allowed}
+.go.stop{background:#3a1918;color:var(--err)}
+.sec{height:42px;padding:0 16px;border-radius:9px;border:1px solid var(--line2);font-weight:600}
+.sec:hover{border-color:var(--accent);color:var(--accent)}
+
+/* glisser-déposer sur l'écran de travail */
+.overlay{position:fixed;inset:52px 0 0 0;background:rgba(13,14,16,.86);backdrop-filter:blur(3px);display:grid;place-items:center;z-index:40}
+.overlay div{border:2px dashed var(--accent);border-radius:20px;padding:44px 70px;font-size:20px;font-weight:800;color:var(--accent)}
+
+/* fenêtre à propos */
+.modal{position:fixed;inset:0;background:rgba(5,6,7,.78);backdrop-filter:blur(4px);display:grid;place-items:center;z-index:50;animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.box{width:min(600px,92vw);max-height:88vh;overflow:auto;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:26px 28px;user-select:text}
+.box h2{font-size:21px;font-weight:800;display:flex;align-items:center;gap:12px}
+.box h2 .vtag{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--line2);border-radius:5px;padding:2px 7px}
+.box h4{font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin:18px 0 6px}
+.box p{color:#c3c8cf;font-size:12.5px;line-height:1.6;margin-bottom:8px}
+.box .by{color:var(--accent);font-weight:600;font-size:13px;margin-top:4px}
+.box .warnb{border-left:3px solid var(--accent);padding:10px 14px;background:#1d1912;border-radius:0 8px 8px 0}
+.box .acts{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px}
+.box a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line2);padding:10px 16px;border-radius:9px;font-size:12.5px;z-index:60;animation:up .2s;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#2a2e35;border-radius:6px;border:2px solid var(--bg)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 64 64"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0a640"/><stop offset="1" stop-color="#e0663a"/></linearGradient></defs><circle cx="32" cy="32" r="30" fill="url(#lg)"/><circle cx="32" cy="32" r="17" fill="none" stroke="#111" stroke-width="4.5" stroke-dasharray="7 4.4"/><path d="M24.5 32.5l5.5 5.5 9.5-11" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Bandua <em>MHL Companion</em></span><small>by Domingo Olmo Martin</small>
+    </div>
+    <span id="chip" class="chip"></span>
+    <div class="sp"></div>
+    <span id="demoTag" class="demo hide" data-i18n="demo"></span>
+    <div class="lang" id="lang"><button data-l="fr">FR</button><button data-l="en">EN</button><button data-l="es">ES</button></div>
+    <button class="ibtn" id="aboutBtn" data-i18n-title="about">i</button>
+  </header>
+
+  <main>
+    <section class="empty" id="empty">
+      <div class="zone" id="zone">
+        <div class="ico"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0a640" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.5a2 2 0 0 0-2-2h-7l-2-2.5H5a2 2 0 0 0-2 2z"/><path d="M9 14l2.2 2.2L15.5 12"/></svg></div>
+        <h1 data-i18n="drop_title"></h1>
+        <p data-i18n="drop_sub"></p>
+        <div class="btns">
+          <button class="go" id="pickFolder" data-i18n="pick_folder"></button>
+          <button class="sec" id="pickMhl" data-i18n="pick_mhl"></button>
+        </div>
+        <div id="zoneState"></div>
+        <div class="note" data-i18n="drop_note"></div>
+      </div>
+    </section>
+
+    <section class="work hide" id="work">
+      <aside class="left">
+        <div>
+          <h3><span data-i18n="rushes"></span><button id="changeBtn" data-i18n="change"></button></h3>
+          <div class="srcbox"><div class="path" id="srcPath"></div>
+            <div class="stats"><span><b id="sFiles">0</b> <span data-i18n="files_word"></span></span><span><b id="sSize">0</b></span></div></div>
+        </div>
+        <div>
+          <h3><span data-i18n="mhl_found"></span><small id="pkCount"></small></h3>
+          <div id="pkgs"></div>
+        </div>
+      </aside>
+
+      <section class="right">
+        <div class="dash">
+          <div class="ring">
+            <svg width="136" height="136"><circle cx="68" cy="68" r="60" stroke="#252930" stroke-width="8" fill="none"/>
+              <circle id="ringArc" cx="68" cy="68" r="60" stroke="var(--accent)" stroke-width="8" fill="none" stroke-linecap="round"
+                stroke-dasharray="376.99" stroke-dashoffset="376.99" style="transition:stroke-dashoffset .2s linear,stroke .3s"/></svg>
+            <div class="pct"><div><small class="lbl" data-i18n="ring_label"></small><b><span id="pct">0</span><i>%</i></b><small id="phase"></small></div></div>
+          </div>
+          <div>
+            <div class="metrics">
+              <div class="m"><span data-i18n="speed"></span><b id="speed">-</b></div>
+              <div class="m"><span data-i18n="remaining"></span><b id="eta">-</b></div>
+              <div class="m"><span data-i18n="elapsed"></span><b id="elapsed">-</b></div>
+              <div class="m"><span data-i18n="files"></span><b id="filesDone">-</b></div>
+            </div>
+            <div class="cur" id="cur"></div>
+            <div class="track"><span id="bar"></span></div>
+          </div>
+        </div>
+        <div id="verdict"></div>
+        <div class="tabs" id="tabs">
+          <button data-tab="problems"><span data-i18n="t_problems"></span><span class="n" id="nProblems">0</span></button>
+          <button data-tab="clips"><span data-i18n="t_clips"></span><span class="n" id="nClips">0</span></button>
+          <button data-tab="extra"><span data-i18n="t_extra"></span><span class="n" id="nExtra">0</span></button>
+        </div>
+        <div class="pane" id="pane"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="msg" id="footMsg"></div>
+    <button class="sec hide" id="exportBtn" data-i18n="export"></button>
+    <button class="sec hide" id="newBtn" data-i18n="new_check"></button>
+    <button class="go" id="go" disabled></button>
+  </footer>
+</div>
+<div id="overlay" class="overlay hide"><div data-i18n="drop_release"></div></div>
+<div id="modal"></div>
+<div id="toast"></div>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
