@@ -2,11 +2,17 @@ name: build
 
 # Se lance :
 #  - à la publication d'une Release sur GitHub (les fichiers y sont alors attachés automatiquement)
-#  - à la main (onglet Actions > build > Run workflow) pour un simple test, sans Release
+#  - à la main (onglet Actions > build > Run workflow) pour un simple test, sans Release,
+#    ou en cochant « attach » pour joindre les fichiers à la Release de la version en cours
 on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      attach:
+        description: "Joindre les fichiers à la Release v<version> existante"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -47,10 +53,15 @@ jobs:
             target/**/release/bundle/**/*.msi
             target/**/release/bundle/**/*.exe
             target/**/release/bundle/**/*.dmg
+      - name: Version
+        id: ver
+        shell: bash
+        run: echo "v=$(grep -m1 '^version' src-tauri/Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
       - name: Attacher à la Release
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || inputs.attach
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || format('v{0}', steps.ver.outputs.v) }}
           files: |
             Bandua_MHL_Companion_*_portable.exe
             target/**/release/bundle/**/*.msi
