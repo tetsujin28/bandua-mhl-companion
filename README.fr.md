@@ -21,8 +21,8 @@ Va sur la **[page des Releases](https://github.com/tetsujin28/bandua-mhl-compani
 | Système | Fichier |
 |---|---|
 | Windows (sans installation) | `Bandua_MHL_Companion_x.y.z_portable.exe` |
-| Windows (installeur) | `Bandua MHL Companion_x.y.z_x64-setup.exe` ou `.msi` |
-| macOS (Intel et Apple Silicon) | `Bandua MHL Companion_x.y.z_universal.dmg` |
+| Windows (installeur) | `Bandua.MHL.Companion_x.y.z_x64-setup.exe` ou `.msi` |
+| macOS (Intel et Apple Silicon) | `Bandua.MHL.Companion_x.y.z_universal.dmg` |
 
 **Premier lancement.** L'app n'est pas encore signée, ton système affichera un avertissement une seule fois :
 - **Windows** : clique sur « Informations complémentaires », puis « Exécuter quand même ».
