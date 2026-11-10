@@ -46,6 +46,8 @@ Ve a la **[página de Releases](https://github.com/tetsujin28/bandua-mhl-compani
 
 La app es **de solo lectura**: nunca modifica, renombra ni añade nada junto a tu material.
 
+El **[manual de uso completo](docs/GUIDE.es.md)** describe cada pantalla, cada estado y el informe, con capturas comentadas.
+
 ## Formatos reconocidos
 
 - **MHL 1.1** (archivo `.mhl`): Bandua, Silverstack, ShotPut Pro, Hedge, YoYotta, mhl-tool…
