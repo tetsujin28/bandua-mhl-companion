@@ -429,16 +429,16 @@ async function cancel() {
 }
 
 async function pickFolder() {
-  const p = DEMO ? "/Volumes/RUSHES/FILM_J03" : await invoke("pick_folder");
+  const p = DEMO ? "/Volumes/RUSHES/BLADE_RUNNER_J03" : await invoke("pick_folder");
   if (p) load(p);
 }
 async function pickMhl() {
-  const p = DEMO ? "/Volumes/RUSHES/FILM_J03/A003_CARD.mhl" : await invoke("pick_mhl");
+  const p = DEMO ? "/Volumes/RUSHES/BLADE_RUNNER_J03/A003_CARD.mhl" : await invoke("pick_mhl");
   if (p) load(p);
 }
 
 async function exportReport() {
-  if (DEMO) { toast(t("exported", { p: "Controle_integrite_FILM_J03.txt" })); return; }
+  if (DEMO) { toast(t("exported", { p: "Controle_integrite_BLADE_RUNNER_J03.txt" })); return; }
   try {
     const p = await invoke("export_report", { lang });
     if (p) toast(t("exported", { p }));

@@ -1,2 +1,3 @@
 target/
 src-tauri/gen/
+docs/tools/out/

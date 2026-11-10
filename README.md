@@ -46,6 +46,8 @@ Go to the **[Releases page](https://github.com/tetsujin28/bandua-mhl-companion/r
 
 The app is **read only**: it never changes, renames or adds anything next to your footage.
 
+The **[full user guide](docs/GUIDE.md)** walks through every screen, every status and the report, with annotated screenshots.
+
 ## Supported formats
 
 - **MHL 1.1** (`.mhl` file): Bandua, Silverstack, ShotPut Pro, Hedge, YoYotta, mhl-tool…
