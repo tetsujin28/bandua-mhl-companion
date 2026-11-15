@@ -26,7 +26,7 @@ Ve a la **[página de Releases](https://github.com/tetsujin28/bandua-mhl-compani
 
 **Primer arranque.** La app aún no está firmada, así que tu sistema mostrará un aviso una sola vez:
 - **Windows**: haz clic en «Más información» y luego en «Ejecutar de todas formas».
-- **macOS**: clic derecho en la app, «Abrir», y confirma.
+- **macOS**: haz doble clic en la aplicación y cierra el mensaje de bloqueo. Abre Ajustes del Sistema > Privacidad y seguridad, baja hasta la sección Seguridad y haz clic en «Abrir de todos modos» junto al nombre de la aplicación; confirma con la contraseña de sesión (solo se pide una vez). Si el botón no aparece, abre Terminal y escribe `xattr -dr com.apple.quarantine ` seguido de la aplicación arrastrada a la ventana.
 
 ## Uso
 
@@ -75,6 +75,12 @@ cargo test -p companion-core
 cargo install tauri-cli --version "^2" --locked
 cd src-tauri && cargo tauri build
 ```
+
+## Apps hermanas
+
+- [Bandua](https://github.com/tetsujin28/bandua): volcar las tarjetas de cámara y verificar cada copia.
+- [Lugus Transfer](https://github.com/tetsujin28/lugus-transfer): enviar el material de un ordenador a otro con un enlace y un código, verificado al llegar.
+- [Ataecina](https://github.com/tetsujin28/ataecina): recuperar y reparar material perdido.
 
 ## Licencia y aviso
 

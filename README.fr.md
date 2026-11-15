@@ -8,7 +8,7 @@
   <a href="README.md">English</a> · <b>Français</b> · <a href="README.es.md">Español</a>
 </p>
 
-Tu viens de recevoir des rushes sur un disque ou par téléchargement. Quelque chose s'est-il abîmé en route ? Bandua MHL Companion relit chaque fichier, le compare au MHL qui l'accompagne et te dit, clip par clip, ce qui est intact et ce qui ne l'est pas.
+Vous venez de recevoir des rushes sur un disque ou par téléchargement. Quelque chose s'est-il abîmé en route ? Bandua MHL Companion relit chaque fichier, le compare au MHL qui l'accompagne et vous dit, clip par clip, ce qui est intact et ce qui ne l'est pas.
 
 Gratuit, pour Windows et macOS. Interface en français, anglais et espagnol. Compagnon de [Bandua](https://github.com/tetsujin28/bandua), l'app de déchargement du même auteur, mais il fonctionne avec les MHL écrits par n'importe quel logiciel.
 
@@ -16,7 +16,7 @@ Gratuit, pour Windows et macOS. Interface en français, anglais et espagnol. Com
 
 ## Téléchargement
 
-Va sur la **[page des Releases](https://github.com/tetsujin28/bandua-mhl-companion/releases)** et choisis le fichier pour ton ordinateur :
+Allez sur la **[page des Releases](https://github.com/tetsujin28/bandua-mhl-companion/releases)** et choisissez le fichier pour votre ordinateur :
 
 | Système | Fichier |
 |---|---|
@@ -24,16 +24,16 @@ Va sur la **[page des Releases](https://github.com/tetsujin28/bandua-mhl-compani
 | Windows (installeur) | `Bandua.MHL.Companion_x.y.z_x64-setup.exe` ou `.msi` |
 | macOS (Intel et Apple Silicon) | `Bandua.MHL.Companion_x.y.z_universal.dmg` |
 
-**Premier lancement.** L'app n'est pas encore signée, ton système affichera un avertissement une seule fois :
-- **Windows** : clique sur « Informations complémentaires », puis « Exécuter quand même ».
-- **macOS** : clic droit sur l'app, « Ouvrir », puis confirme.
+**Premier lancement.** L'app n'est pas encore signée, votre système affichera un avertissement une seule fois :
+- **Windows** : cliquez sur « Informations complémentaires », puis « Exécuter quand même ».
+- **macOS** : double-cliquez sur l'application, puis fermez le message de blocage. Ouvrez Réglages Système > Confidentialité et sécurité, descendez jusqu'à la section Sécurité et cliquez sur « Ouvrir quand même » à côté du nom de l'application ; confirmez avec le mot de passe de session (demandé une seule fois). Si le bouton n'apparaît pas, ouvrez le Terminal et tapez `xattr -dr com.apple.quarantine ` suivi de l'application glissée dans la fenêtre.
 
 ## Utilisation
 
-1. **Dépose le dossier des rushes** sur la fenêtre (ou choisis-le, ou choisis un seul fichier `.mhl`). L'app trouve tous les MHL qu'il contient, même répartis sur plusieurs jours, caméras et cartes.
-2. Clique sur **Lancer le contrôle**. Chaque fichier est relu depuis le disque, sans passer par le cache du système, et son hash est comparé au MHL.
-3. Lis le verdict. L'onglet **Problèmes** liste chaque fichier abîmé avec le nom de son clip, la nature du problème et un bouton **Afficher** qui l'ouvre dans le Finder ou l'Explorateur. **Clips** montre chaque clip avec son statut, **Hors MHL** les fichiers qui n'ont pas pu être contrôlés.
-4. **Exporte le rapport** (fichier texte) pour le renvoyer à la production ou au DIT.
+1. **Déposez le dossier des rushes** sur la fenêtre (ou choisissez-le, ou choisissez un seul fichier `.mhl`). L'app trouve tous les MHL qu'il contient, même répartis sur plusieurs jours, caméras et cartes.
+2. Cliquez sur **Lancer le contrôle**. Chaque fichier est relu depuis le disque, sans passer par le cache du système, et son hash est comparé au MHL.
+3. Lisez le verdict. L'onglet **Problèmes** liste chaque fichier abîmé avec le nom de son clip, la nature du problème et un bouton **Afficher** qui l'ouvre dans le Finder ou l'Explorateur. **Clips** montre chaque clip avec son statut, **Hors MHL** les fichiers qui n'ont pas pu être contrôlés.
+4. **Exportez le rapport** (fichier texte) pour le renvoyer à la production ou au DIT.
 
 | Statut | Signification |
 |---|---|
@@ -44,7 +44,7 @@ Va sur la **[page des Releases](https://github.com/tetsujin28/bandua-mhl-compani
 | ILLISIBLE | Le disque n'a pas pu lire le fichier |
 | SANS HASH | Le MHL ne donne pas de hash : seule la taille a été vérifiée |
 
-L'app est **en lecture seule** : elle ne modifie, ne renomme et n'ajoute jamais rien à côté de tes rushes.
+L'app est **en lecture seule** : elle ne modifie, ne renomme et n'ajoute jamais rien à côté de vos rushes.
 
 Le **[mode d'emploi détaillé](docs/GUIDE.fr.md)** décrit chaque écran, chaque statut et le rapport, avec des captures annotées.
 
@@ -76,8 +76,14 @@ cargo install tauri-cli --version "^2" --locked
 cd src-tauri && cargo tauri build
 ```
 
+## Apps sœurs
+
+- [Bandua](https://github.com/tetsujin28/bandua) : décharger les cartes caméra et vérifier chaque copie.
+- [Lugus Transfer](https://github.com/tetsujin28/lugus-transfer) : envoyer les rushes d'un ordinateur à l'autre avec un lien et un code, vérifiés à l'arrivée.
+- [Ataecina](https://github.com/tetsujin28/ataecina) : récupérer et réparer les rushes perdus.
+
 ## Licence et avertissement
 
 Licence MIT, © 2026 Domingo Olmo Martin. Voir [LICENSE](LICENSE).
 
-Cet outil aide à contrôler des médias ; il ne remplace pas tes propres vérifications ni tes procédures de sauvegarde. Il est fourni « en l'état », sans aucune garantie. Un contrôle n'est valable que si le MHL vient de la personne qui a fait la copie d'origine.
+Cet outil aide à contrôler des médias ; il ne remplace pas vos propres vérifications ni vos procédures de sauvegarde. Il est fourni « en l'état », sans aucune garantie. Un contrôle n'est valable que si le MHL vient de la personne qui a fait la copie d'origine.
