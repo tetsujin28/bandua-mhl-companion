@@ -24,19 +24,19 @@
 
 ## 1. Présentation
 
-Tu viens de recevoir des rushes, sur un disque ou par téléchargement. Quelque chose s'est-il abîmé en route ? Bandua MHL Companion relit chaque fichier, le compare au fichier MHL qui l'accompagne et te dit, clip par clip, ce qui est intact et ce qui ne l'est pas.
+Vous venez de recevoir des rushes, sur un disque ou par téléchargement. Quelque chose s'est-il abîmé en route ? Bandua MHL Companion relit chaque fichier, le compare au fichier MHL qui l'accompagne et vous dit, clip par clip, ce qui est intact et ce qui ne l'est pas.
 
 Un **MHL** est la liste des fichiers d'une copie, avec leur taille et leur empreinte (hash), écrite par le logiciel qui a déchargé les cartes sur le plateau. Si un fichier change, même d'un seul octet, son empreinte change : c'est ce que l'app vérifie.
 
 L'app s'adresse à ceux qui **reçoivent** les rushes : monteur, assistant de montage, labo, post-production, production, réalisateur. Elle est le compagnon de [Bandua](https://github.com/tetsujin28/bandua), l'app de déchargement du même auteur, mais elle lit aussi les MHL écrits par Silverstack, ShotPut Pro, Hedge et les autres.
 
-Elle est **en lecture seule** : elle ne modifie, ne renomme et n'ajoute jamais rien à côté de tes rushes. Gratuite, open source (licence MIT), sans compte.
+Elle est **en lecture seule** : elle ne modifie, ne renomme et n'ajoute jamais rien à côté de vos rushes. Gratuite, open source (licence MIT), sans compte.
 
 ## 2. Installation
 
 ### Télécharger
 
-Va sur la [page des Releases](https://github.com/tetsujin28/bandua-mhl-companion/releases) et choisis le fichier pour ton ordinateur :
+Allez sur la [page des Releases](https://github.com/tetsujin28/bandua-mhl-companion/releases) et choisissez le fichier pour votre ordinateur :
 
 | Système | Fichier |
 |---|---|
@@ -46,14 +46,14 @@ Va sur la [page des Releases](https://github.com/tetsujin28/bandua-mhl-companion
 
 ### Premier lancement
 
-L'app n'est pas encore signée. Ton système affiche donc un avertissement, une seule fois :
+L'app n'est pas encore signée. Votre système affiche donc un avertissement, une seule fois :
 
-- **Windows** : clique sur « Informations complémentaires », puis sur « Exécuter quand même ».
-- **macOS** : fais un clic droit sur l'app, choisis « Ouvrir », puis confirme.
+- **Windows** : cliquez sur « Informations complémentaires », puis sur « Exécuter quand même ».
+- **macOS** : double-cliquez sur l'application, puis fermez le message de blocage. Ouvrez Réglages Système > Confidentialité et sécurité, descendez jusqu'à la section Sécurité et cliquez sur « Ouvrir quand même » à côté du nom de l'application ; confirmez avec le mot de passe de session (demandé une seule fois). Si le bouton n'apparaît pas, ouvrez le Terminal et tapez `xattr -dr com.apple.quarantine ` suivi de l'application glissée dans la fenêtre.
 
 ### Fenêtre de bienvenue
 
-Au premier lancement, l'app présente ce qu'elle fait, les formats reconnus et un avertissement (1). Lis-le, puis clique sur **J'ai compris** (2). Tu le retrouveras dans **À propos** (le bouton *i*, en haut à droite). Les boutons **FR / EN / ES** changent la langue à tout moment.
+Au premier lancement, l'app présente ce qu'elle fait, les formats reconnus et un avertissement (1). Lisez-le, puis cliquez sur **J'ai compris** (2). Vous le retrouverez dans **À propos** (le bouton *i*, en haut à droite). Les boutons **FR / EN / ES** changent la langue à tout moment.
 
 <p align="center"><img src="guide/00_welcome_fr.png" width="860" alt="Fenêtre de bienvenue"></p>
 
@@ -64,12 +64,12 @@ Au premier lancement, l'app présente ce qu'elle fait, les formats reconnus et u
 Trois façons de commencer :
 
 - **Glisse le dossier des rushes** sur la fenêtre et relâche-le ;
-- clique sur **Choisir un dossier** (1) ;
-- ou clique sur **Choisir un fichier MHL** (2) pour ne contrôler qu'une seule carte.
+- cliquez sur **Choisir un dossier** (1) ;
+- ou cliquez sur **Choisir un fichier MHL** (2) pour ne contrôler qu'une seule carte.
 
-Tu peux donner le dossier de toute une journée, voire de tout un tournage : l'app cherche **tous les MHL** qu'il contient, sur plusieurs jours, caméras et cartes à la fois.
+Vous pouvez donner le dossier de toute une journée, voire de tout un tournage : l'app cherche **tous les MHL** qu'il contient, sur plusieurs jours, caméras et cartes à la fois.
 
-Si aucun MHL n'est trouvé, l'app te le dit. Demande alors à la personne qui t'a envoyé les rushes le fichier `.mhl`, ou le dossier `ascmhl`.
+Si aucun MHL n'est trouvé, l'app vous le dit. Demandez alors à la personne qui vous a envoyé les rushes le fichier `.mhl`, ou le dossier `ascmhl`.
 
 ## 4. Lancer le contrôle
 
@@ -77,7 +77,7 @@ Si aucun MHL n'est trouvé, l'app te le dit. Demande alors à la personne qui t'
 
 1. **Rushes** : le dossier choisi, avec le nombre de fichiers et la taille totale. **Changer** permet d'en choisir un autre.
 2. **MHL trouvés** : une fiche par MHL, avec son format (*MHL 1.1* ou *ASC MHL*), son nom, son emplacement dans le dossier, le nombre de fichiers, la taille, l'algorithme de hash, le logiciel qui l'a écrit et, pour un ASC MHL, son nombre de générations.
-3. Le message du bas résume le travail. Clique sur **Lancer le contrôle**.
+3. Le message du bas résume le travail. Cliquez sur **Lancer le contrôle**.
 
 <p align="center"><img src="guide/03_running_fr.png" width="860" alt="Contrôle en cours"></p>
 
@@ -87,9 +87,9 @@ Pendant le contrôle :
 2. les **compteurs** donnent le débit, le temps restant, le temps écoulé et le nombre de fichiers relus ;
 3. chaque **fiche MHL** affiche son état : *en attente*, *en cours*, *intact* ou le nombre de problèmes ;
 4. les **problèmes** s'affichent au fur et à mesure, sans attendre la fin ;
-5. le bouton devient **Annuler**. Clique dessus, puis sur **Confirmer l'annulation** dans les trois secondes. Un contrôle interrompu donne un résultat incomplet.
+5. le bouton devient **Annuler**. Cliquez dessus, puis sur **Confirmer l'annulation** dans les trois secondes. Un contrôle interrompu donne un résultat incomplet.
 
-Chaque fichier est relu **depuis le disque**, en contournant le cache du système. Le contrôle porte donc vraiment sur ce qui est écrit sur le disque. Le temps dépend surtout de la vitesse du disque : compte la durée d'une lecture complète des rushes.
+Chaque fichier est relu **depuis le disque**, en contournant le cache du système. Le contrôle porte donc vraiment sur ce qui est écrit sur le disque. Le temps dépend surtout de la vitesse du disque : comptez la durée d'une lecture complète des rushes.
 
 ## 5. Lire le résultat
 
@@ -109,7 +109,7 @@ Chaque fichier est relu **depuis le disque**, en contournant le cache du systèm
 2. L'onglet **Problèmes** liste chaque fichier en cause : son statut (*ABÎMÉ*, *MANQUANT*…), le nom du **clip** auquel il appartient, le MHL concerné, son chemin et une explication. Pour un fichier abîmé, les deux empreintes (attendue et lue) sont affichées.
 3. Le bouton **Afficher** ouvre le dossier du fichier dans l'Explorateur ou le Finder.
 
-Le plus utile pour la suite : le **nom du clip**. C'est lui que tu demanderas à renvoyer.
+Le plus utile pour la suite : le **nom du clip**. C'est lui que vous demanderez à renvoyer.
 
 ### Les autres onglets
 
@@ -125,12 +125,12 @@ L'onglet **Hors MHL** (1) liste les fichiers présents dans le dossier mais abse
 
 <p align="center"><img src="guide/07_export_fr.png" width="860" alt="Exporter le rapport"></p>
 
-1. **Exporter le rapport** enregistre un fichier texte à l'endroit de ton choix, par exemple `Controle_integrite_BLADE_RUNNER_J03_2026-11-10_1432.txt`. Il liste les MHL contrôlés, chaque problème avec son clip, et les fichiers hors MHL. C'est ce fichier que tu renvoies à la production ou au DIT.
+1. **Exporter le rapport** enregistre un fichier texte à l'endroit de votre choix, par exemple `Controle_integrite_BLADE_RUNNER_J03_2026-11-10_1432.txt`. Il liste les MHL contrôlés, chaque problème avec son clip, et les fichiers hors MHL. C'est ce fichier que vous renvoyez à la production ou au DIT.
 2. Un message confirme l'enregistrement.
 3. **Nouveau dossier** revient à l'écran d'accueil.
 4. **Contrôler à nouveau** relance le contrôle sur le même dossier, par exemple après avoir recopié un clip.
 
-Le rapport est le seul fichier que l'app écrit, et seulement là où tu le décides.
+Le rapport est le seul fichier que l'app écrit, et seulement là où vous le décidez.
 
 ## 7. Les statuts en détail
 
@@ -143,7 +143,7 @@ Le rapport est le seul fichier que l'app écrit, et seulement là où tu le déc
 | **ILLISIBLE** | Le disque n'a pas pu lire le fichier. | Vérifier le disque et le câble, essayer sur un autre ordinateur. |
 | **SANS HASH** | Le MHL ne donne pas d'empreinte pour ce fichier : seule sa taille a été vérifiée. | Demander un MHL complet si c'est important. |
 
-Si un historique **ASC MHL** a été modifié après sa création, la fiche du MHL l'indique : « Historique ASC MHL modifié après sa création ». Méfie-toi alors de ce MHL et demande-en un nouveau.
+Si un historique **ASC MHL** a été modifié après sa création, la fiche du MHL l'indique : « Historique ASC MHL modifié après sa création ». Méfiez-vous alors de ce MHL et demandez-en un nouveau.
 
 ## 8. Formats reconnus
 
@@ -155,10 +155,10 @@ Si un historique **ASC MHL** a été modifié après sa création, la fiche du M
 ## 9. Bonnes pratiques
 
 - **Contrôle dès réception**, avant de commencer à travailler et avant que l'équipe de tournage ne formate les cartes.
-- **Garde le disque d'origine** tant que le contrôle n'est pas terminé et que tes propres copies ne sont pas faites.
+- **Gardez le disque d'origine** tant que le contrôle n'est pas terminé et que vos propres copies ne sont pas faites.
 - **Un MHL n'a de valeur que s'il vient de la personne qui a fait la copie d'origine**, idéalement envoyé à part des rushes (par e-mail, par exemple). Un MHL refait après coup sur des fichiers déjà abîmés les déclarerait intacts.
-- **Contrôle aussi tes propres copies** : après avoir copié les rushes sur ton disque de montage, relance le contrôle sur la copie.
-- **Exporte le rapport** et garde-le avec le projet.
+- **Contrôlez aussi vos propres copies** : après avoir copié les rushes sur votre disque de montage, relancez le contrôle sur la copie.
+- **Exportez le rapport** et gardez-le avec le projet.
 
 ## 10. Questions fréquentes
 
@@ -166,23 +166,23 @@ Si un historique **ASC MHL** a été modifié après sa création, la fiche du M
 Non. Elle lit les MHL de Bandua, mais aussi ceux des autres logiciels.
 
 **L'app modifie-t-elle mes fichiers ?**
-Non, jamais. Elle ne fait que lire. Le seul fichier écrit est le rapport, quand tu l'exportes.
+Non, jamais. Elle ne fait que lire. Le seul fichier écrit est le rapport, quand vous l'exportez.
 
 **Pourquoi le contrôle est-il aussi long ?**
 Chaque fichier est relu en entier, depuis le disque. La durée dépend de la vitesse du disque et de la quantité de rushes.
 
 **Un fichier est ABÎMÉ, mais la vidéo se lit bien. C'est grave ?**
-Oui, il faut le signaler. Le fichier n'est plus celui qui a été tourné : l'erreur peut se trouver sur une image que tu n'as pas encore vue, ou dans les métadonnées.
+Oui, il faut le signaler. Le fichier n'est plus celui qui a été tourné : l'erreur peut se trouver sur une image que vous n'avez pas encore vue, ou dans les métadonnées.
 
 **Existe-t-il une version en ligne de commande ?**
 Oui, pour les scripts : `bandua-mhl-check <dossier|fichier.mhl> [--lang fr|en|es] [--report rapport.txt]`. Code de sortie : `0` tout est intact, `1` problèmes trouvés, `2` aucun MHL trouvé.
 
 **L'app envoie-t-elle des données sur Internet ?**
-Non. Tout se passe sur ton ordinateur.
+Non. Tout se passe sur votre ordinateur.
 
 ## 11. Avertissement et licence
 
-Cet outil aide à contrôler des médias. Il ne remplace pas tes propres vérifications ni tes procédures de sauvegarde. Il est fourni « en l'état », sans aucune garantie. L'auteur ne saurait être tenu responsable de toute perte, corruption ou suppression de données, ni de tout dommage direct ou indirect résultant de son utilisation.
+Cet outil aide à contrôler des médias. Il ne remplace pas vos propres vérifications ni vos procédures de sauvegarde. Il est fourni « en l'état », sans aucune garantie. L'auteur ne saurait être tenu responsable de toute perte, corruption ou suppression de données, ni de tout dommage direct ou indirect résultant de son utilisation.
 
 **Un contrôle n'est valable que si le MHL vient de la personne qui a fait la copie d'origine.**
 
