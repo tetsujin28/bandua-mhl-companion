@@ -11,7 +11,7 @@ Windows et macOS (binaire universel). Pas de Linux pour l'instant. Licence MIT.
 - **Aucun tiret cadratin (caractère U+2014)** dans les textes écrits pour Dom : interface, README, notes de version, messages de commit. Utiliser virgules, points ou parenthèses.
 - Échanges avec Dom en français. Commentaires et messages de commit en français, comme le code existant.
 - Interface et rapports **toujours en trois langues** (français, anglais, espagnol) : toute nouvelle chaîne s'ajoute dans les trois.
-- README : `README.md` (anglais, langue principale), `README.fr.md`, `README.es.md`, à tenir synchronisés. Le README français tutoie l'utilisateur.
+- README : `README.md` (anglais, langue principale), `README.fr.md`, `README.es.md`, à tenir synchronisés. Le README et le mode d'emploi français vouvoient l'utilisateur, comme les autres apps.
 - Interface sombre, simple et soignée. Le vert et le rouge sont réservés aux statuts.
 
 ## Principe non négociable
