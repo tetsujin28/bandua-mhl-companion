@@ -37,6 +37,14 @@ header .sp{flex:1}
 .lang button:hover{color:var(--text)}
 .ibtn{width:30px;height:30px;border-radius:7px;border:1px solid var(--line);color:var(--muted);font-weight:700;font-family:Georgia,serif;font-style:italic}
 .ibtn:hover{color:var(--accent);border-color:var(--accent)}
+.ibtn.gear{display:grid;place-items:center;font-style:normal}
+.verbtn{font-family:var(--mono);font-size:11px;color:var(--dim);padding:5px 9px;border:1px solid transparent;border-radius:7px;white-space:nowrap}
+.verbtn:hover{color:var(--text);border-color:var(--line)}
+.verbtn.new{color:var(--accent);border-color:var(--accent);font-weight:600}
+.verbtn .vs{display:none}
+.box .opt{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);cursor:pointer;margin-bottom:6px}
+.box .opt input{accent-color:var(--accent);width:16px;height:16px}
+@media (max-width:1060px){.verbtn .va{display:none}.verbtn .vs{display:inline}}
 
 /* écran d'accueil */
 main{min-height:0;position:relative}
@@ -191,7 +199,9 @@ footer .msg{flex:1;color:var(--muted);font-size:12px}
     <span id="chip" class="chip"></span>
     <div class="sp"></div>
     <span id="demoTag" class="demo hide" data-i18n="demo"></span>
+    <button class="verbtn" id="verBadge"></button>
     <div class="lang" id="lang"><button data-l="fr">FR</button><button data-l="en">EN</button><button data-l="es">ES</button></div>
+    <button class="ibtn gear" id="settingsBtn" data-i18n-title="settings" aria-label="Settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     <button class="ibtn" id="aboutBtn" data-i18n-title="about">i</button>
   </header>
 

@@ -4,6 +4,7 @@
 const I18N = {
   fr: {
     tagline: "contrôle des rushes par MHL", demo: "Mode démo : données simulées", about: "À propos",
+    settings: "Réglages", updates_title: "Versions", update_check: "Vérifier les nouvelles versions", update_check_sub: "Une fois au lancement, l'application demande à GitHub si une version plus récente existe. Aucune autre donnée n'est envoyée. Désactive cette case pour qu'elle ne contacte jamais GitHub.", update_badge: "v{v} disponible", update_title: "Une nouvelle version est disponible : ouvrir la page de téléchargement", version_title: "Version de l'application",
     drop_title: "Dépose ici le dossier des rushes",
     drop_sub: "ou un fichier .mhl. L'app trouve tous les MHL du dossier (MHL 1.1 et ASC MHL), relit chaque fichier et te dit lequel pose problème.",
     pick_folder: "Choisir un dossier", pick_mhl: "Choisir un fichier MHL", drop_release: "Relâche pour analyser",
@@ -54,6 +55,7 @@ const I18N = {
   },
   en: {
     tagline: "MHL footage checker", demo: "Demo mode: simulated data", about: "About",
+    settings: "Settings", updates_title: "Versions", update_check: "Check for new versions", update_check_sub: "Once at startup, the app asks GitHub whether a newer version exists. Nothing else is sent. Untick this box so the app never contacts GitHub.", update_badge: "v{v} available", update_title: "A new version is available: open the download page", version_title: "Application version",
     drop_title: "Drop the footage folder here",
     drop_sub: "or an .mhl file. The app finds every MHL in the folder (MHL 1.1 and ASC MHL), reads each file back and tells you which one has a problem.",
     pick_folder: "Choose a folder", pick_mhl: "Choose an MHL file", drop_release: "Release to analyse",
@@ -104,6 +106,7 @@ const I18N = {
   },
   es: {
     tagline: "control de material por MHL", demo: "Modo demo: datos simulados", about: "Acerca de",
+    settings: "Ajustes", updates_title: "Versiones", update_check: "Buscar nuevas versiones", update_check_sub: "Una vez al iniciar, la aplicación pregunta a GitHub si existe una versión más reciente. No se envía ningún otro dato. Desmarca esta casilla para que no contacte nunca con GitHub.", update_badge: "v{v} disponible", update_title: "Hay una nueva versión disponible: abrir la página de descarga", version_title: "Versión de la aplicación",
     drop_title: "Suelta aquí la carpeta del material",
     drop_sub: "o un archivo .mhl. La app encuentra todos los MHL de la carpeta (MHL 1.1 y ASC MHL), vuelve a leer cada archivo y te dice cuál tiene un problema.",
     pick_folder: "Elegir una carpeta", pick_mhl: "Elegir un archivo MHL", drop_release: "Suelta para analizar",

@@ -57,6 +57,16 @@ En el primer arranque, la app presenta lo que hace, los formatos reconocidos y u
 
 <p align="center"><img src="guide/00_welcome_es.png" width="860" alt="Ventana de bienvenida"></p>
 
+### Versión y ajustes
+
+Al iniciar, Bandua MHL Companion pregunta una vez a GitHub si existe una versión más reciente (las versiones beta cuentan). Si es así, el número de versión de arriba a la derecha pasa a **vX.Y.Z disponible**: un clic abre la página de descarga. Nada se instala solo; descargas la nueva versión cuando lo decidas, mejor entre dos trabajos. Sin conexión, no se muestra nada y la aplicación funciona con normalidad.
+
+<p align="center"><img src="guide/09_update_es.png" width="520" alt="Hay una nueva versión disponible"></p>
+
+La rueda dentada abre los **Ajustes**. La casilla **Buscar nuevas versiones** (1) está marcada por defecto; desmárcala para que la aplicación no contacte nunca con GitHub. No se envía ningún otro dato durante esta comprobación.
+
+<p align="center"><img src="guide/10_settings_es.png" width="620" alt="Los ajustes"></p>
+
 ## 3. Elegir el material
 
 <p align="center"><img src="guide/01_start_es.png" width="860" alt="Pantalla de inicio"></p>
@@ -178,7 +188,7 @@ Sí, hay que avisar. El archivo ya no es el que se rodó: el error puede estar e
 Sí, para scripts: `bandua-mhl-check <carpeta|archivo.mhl> [--lang fr|en|es] [--report informe.txt]`. Código de salida: `0` todo está intacto, `1` se han encontrado problemas, `2` no hay ningún MHL.
 
 **¿La app envía datos por Internet?**
-No. Todo ocurre en tu ordenador.
+No. El control y el informe se hacen enteramente en tu ordenador. La única conexión es la búsqueda de nuevas versiones al iniciar, una petición a GitHub que no envía nada más; puedes desactivarla en los Ajustes.
 
 ## 11. Aviso y licencia
 

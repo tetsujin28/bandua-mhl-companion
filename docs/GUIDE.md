@@ -57,6 +57,16 @@ On first launch, the app explains what it does, the supported formats and a disc
 
 <p align="center"><img src="guide/00_welcome_en.png" width="860" alt="Welcome window"></p>
 
+### Version and settings
+
+At startup, Bandua MHL Companion asks GitHub once whether a newer version exists (beta versions count). If so, the version number at the top right turns into **vX.Y.Z available**: one click opens the download page. Nothing installs itself; you download the new version when you decide to, ideally between two jobs. When offline, nothing is shown and the app works as usual.
+
+<p align="center"><img src="guide/09_update_en.png" width="520" alt="A new version is available"></p>
+
+The gear opens the **Settings**. The **Check for new versions** box (1) is ticked by default; untick it so the app never contacts GitHub. No other data is sent during this check.
+
+<p align="center"><img src="guide/10_settings_en.png" width="620" alt="The settings"></p>
+
 ## 3. Choosing the footage
 
 <p align="center"><img src="guide/01_start_en.png" width="860" alt="Start screen"></p>
@@ -178,7 +188,7 @@ Yes, report it. The file is no longer the one that was shot: the error may be on
 Yes, for scripts: `bandua-mhl-check <folder|file.mhl> [--lang fr|en|es] [--report report.txt]`. Exit code: `0` everything is intact, `1` problems found, `2` no MHL found.
 
 **Does the app send data over the Internet?**
-No. Everything happens on your computer.
+No. The check and the report happen entirely on your computer. The only connection is the check for new versions at startup, a request to GitHub that sends nothing else; you can turn it off in the Settings.
 
 ## 11. Disclaimer and license
 

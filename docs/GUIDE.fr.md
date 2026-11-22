@@ -57,6 +57,16 @@ Au premier lancement, l'app présente ce qu'elle fait, les formats reconnus et u
 
 <p align="center"><img src="guide/00_welcome_fr.png" width="860" alt="Fenêtre de bienvenue"></p>
 
+### Version et réglages
+
+Au lancement, Bandua MHL Companion demande une fois à GitHub si une version plus récente existe (les versions bêta comptent). Si c'est le cas, le numéro de version en haut à droite devient **vX.Y.Z disponible** : un clic ouvre la page de téléchargement. Rien ne s'installe tout seul ; vous téléchargez la nouvelle version quand vous le décidez, de préférence entre deux travaux. Hors ligne, rien ne s'affiche et l'application fonctionne normalement.
+
+<p align="center"><img src="guide/09_update_fr.png" width="520" alt="Une nouvelle version est disponible"></p>
+
+La roue dentée ouvre les **Réglages**. La case **Vérifier les nouvelles versions** (1) est cochée par défaut ; décochez-la pour que l'application ne contacte jamais GitHub. Aucune autre donnée n'est envoyée lors de cette vérification.
+
+<p align="center"><img src="guide/10_settings_fr.png" width="620" alt="Les réglages"></p>
+
 ## 3. Choisir les rushes
 
 <p align="center"><img src="guide/01_start_fr.png" width="860" alt="Écran d'accueil"></p>
@@ -178,7 +188,7 @@ Oui, il faut le signaler. Le fichier n'est plus celui qui a été tourné : l'er
 Oui, pour les scripts : `bandua-mhl-check <dossier|fichier.mhl> [--lang fr|en|es] [--report rapport.txt]`. Code de sortie : `0` tout est intact, `1` problèmes trouvés, `2` aucun MHL trouvé.
 
 **L'app envoie-t-elle des données sur Internet ?**
-Non. Tout se passe sur votre ordinateur.
+Non. Le contrôle et le rapport se font entièrement sur votre ordinateur. La seule connexion est la vérification des nouvelles versions au lancement, une requête à GitHub qui n'envoie rien d'autre ; vous pouvez la désactiver dans les Réglages.
 
 ## 11. Avertissement et licence
 

@@ -6,7 +6,7 @@ const DEMO = !TAURI;
 const invoke = DEMO ? null : TAURI.core.invoke;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const VERSION = "0.1.0";
+let VERSION = "0.1.0"; // remplacé au démarrage par la version de l'application (tauri.conf.json)
 const SITE = "https://tetsujin28.github.io";
 
 function store(k, v) {
@@ -30,6 +30,7 @@ function applyLang() {
   document.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
   document.querySelectorAll("[data-i18n-title]").forEach((el) => (el.title = t(el.dataset.i18nTitle)));
   document.querySelectorAll("#lang button").forEach((b) => b.classList.toggle("on", b.dataset.l === lang));
+  renderVersion();
   render();
 }
 
@@ -463,12 +464,81 @@ function about(first) {
   $("siteLink").onclick = () => (DEMO ? window.open(SITE) : invoke("open_url", { url: SITE }));
 }
 
+// ------------------------------------------------------------------ Versions
+
+const RELEASES_API = "https://api.github.com/repos/tetsujin28/bandua-mhl-companion/releases?per_page=15";
+const RELEASES_PAGE = "https://github.com/tetsujin28/bandua-mhl-companion/releases";
+
+// "v0.3.0" ou "0.3.0-beta" -> [0, 3, 0] ; null si le texte n'est pas un numéro.
+function parseVersion(text) {
+  const m = /^v?(\d+)\.(\d+)\.(\d+)/.exec(String(text || "").trim());
+  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+}
+// > 0 si a est plus récente que b, < 0 si plus ancienne, 0 si égales.
+function compareVersions(a, b) {
+  for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return a[i] - b[i];
+  return 0;
+}
+
+let LATEST = null; // version plus récente trouvée sur GitHub, sinon null
+
+// Interroge GitHub une seule fois. Les pré-versions comptent (les bêtas n'en ont
+// pas d'autres), les brouillons non. En cas d'échec (hors ligne, limite GitHub),
+// on ne dit rien.
+async function checkUpdate() {
+  if (store("bmc_update") === "0") { LATEST = null; return renderVersion(); }
+  try {
+    const res = await fetch(RELEASES_API, { headers: { Accept: "application/vnd.github+json" } });
+    if (!res.ok) return;
+    let best = null;
+    for (const r of await res.json()) {
+      if (r.draft) continue;
+      const v = parseVersion(r.tag_name);
+      if (v && (!best || compareVersions(v, best) > 0)) best = v;
+    }
+    const mine = parseVersion(VERSION);
+    LATEST = best && mine && compareVersions(best, mine) > 0 ? best.join(".") : null;
+  } catch { LATEST = null; }
+  renderVersion();
+}
+
+function renderVersion() {
+  const b = document.getElementById("verBadge");
+  if (!b) return;
+  // Fenêtre étroite : seulement le numéro (voir .verbtn .vs dans le CSS).
+  b.innerHTML = LATEST
+    ? `<span class="va">${esc(t("update_badge", { v: LATEST }))}</span><span class="vs">v${esc(LATEST)}</span>`
+    : esc("v" + VERSION);
+  b.title = LATEST ? t("update_title") : t("version_title");
+  b.classList.toggle("new", !!LATEST);
+}
+
+function openReleases() {
+  DEMO ? window.open(RELEASES_PAGE, "_blank") : invoke("open_url", { url: RELEASES_PAGE }).catch(() => {});
+}
+
+function settings() {
+  const m = $("modal");
+  const on = store("bmc_update") !== "0";
+  m.innerHTML = `<div class="modal"><div class="box">
+    <h2>${esc(t("settings"))}</h2>
+    <h4>${esc(t("updates_title"))}</h4>
+    <label class="opt"><input type="checkbox" id="optUpdate"${on ? " checked" : ""}><span>${esc(t("update_check"))}</span></label>
+    <p>${esc(t("update_check_sub"))}</p>
+    <div class="acts"><span></span><button class="go" id="closeSettings">${esc(t("close"))}</button></div>
+  </div></div>`;
+  $("optUpdate").onchange = () => { store("bmc_update", $("optUpdate").checked ? "1" : "0"); checkUpdate(); };
+  $("closeSettings").onclick = () => { m.innerHTML = ""; };
+}
+
 // ------------------------------------------------------------------ liaisons
 $("lang").addEventListener("click", (e) => {
   const l = e.target.dataset && e.target.dataset.l;
   if (l) { lang = l; store("bmc_lang", l); applyLang(); }
 });
 $("aboutBtn").onclick = () => about(false);
+$("settingsBtn").onclick = settings;
+$("verBadge").onclick = () => (LATEST ? openReleases() : about(false));
 $("pickFolder").onclick = pickFolder;
 $("pickMhl").onclick = pickMhl;
 $("changeBtn").onclick = () => { if (S.phase !== "running") { S.phase = "empty"; S.zoneMsg = null; render(); } };
@@ -565,6 +635,9 @@ function demoFinish(cancelled) {
 
 // ------------------------------------------------------------------ démarrage
 applyLang();
+Promise.resolve(TAURI?.app?.getVersion?.())
+  .then((v) => { if (v) VERSION = v; renderVersion(); return checkUpdate(); })
+  .catch(() => checkUpdate());
 if (!store("bmc_ack")) about(true);
 if (!DEMO) invoke("initial_path").then((p) => p && load(p)).catch(() => {});
 if (DEMO && location.hash === "#run") { store("bmc_ack", "1"); $("modal").innerHTML = ""; pickFolder().then(() => setTimeout(start, 900)); }
