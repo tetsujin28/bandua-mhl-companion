@@ -53,5 +53,7 @@ for L in ["fr","en","es"]:
     make("05_clips","clips",L,[("tabClips",1),("badRow",2)],col=RED)
     make("06_extra","extra",L,[("tabExtra",1,8,"right"),(lambda R:[R["pane"][0],R["pane"][1],R["pane"][2],R["pane"][1]+140],2,-6)])
     make("07_export","export",L,[("exportBtn",1,8,"left"),("toast",2,8,"left"),("newBtn",3,8,"top"),("go",4,8,"top")])
+    make("09_update","update",L,[("verBadge",None,6)],crop=["verBadge","aboutBtn"],margin=24,maxw=900)
+    make("10_settings","settings",L,[("opt",1,8,"right")],crop=["box"],margin=24)
     make("08_ok","ok",L,[("ring",1),("verdictBox",2,-4),(lambda R:union([R["pk0"],R["pk1"]]),3)])
 print("images écrites dans", GUIDE)

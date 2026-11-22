@@ -28,6 +28,8 @@ Ve a la **[página de Releases](https://github.com/tetsujin28/bandua-mhl-compani
 - **Windows**: haz clic en «Más información» y luego en «Ejecutar de todas formas».
 - **macOS**: haz doble clic en la aplicación y cierra el mensaje de bloqueo. Abre Ajustes del Sistema > Privacidad y seguridad, baja hasta la sección Seguridad y haz clic en «Abrir de todos modos» junto al nombre de la aplicación; confirma con la contraseña de sesión (solo se pide una vez). Si el botón no aparece, abre Terminal y escribe `xattr -dr com.apple.quarantine ` seguido de la aplicación arrastrada a la ventana.
 
+**Nuevas versiones.** Al iniciar, la aplicación pregunta una vez a GitHub si existe una versión más reciente y, si es así, lo indica arriba a la derecha; un clic abre la página de descarga. Nada se instala solo y no se envía ningún otro dato. Puedes desactivar esta comprobación en los Ajustes (la rueda dentada).
+
 ## Uso
 
 1. **Suelta la carpeta del material** en la ventana (o elígela, o elige un solo archivo `.mhl`). La app encuentra todos los MHL que contiene, aunque estén repartidos en varios días, cámaras y tarjetas.

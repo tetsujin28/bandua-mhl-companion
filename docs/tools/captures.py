@@ -21,7 +21,8 @@ SEL = {"zone": "#zone", "pickFolder": "#pickFolder", "pickMhl": "#pickMhl", "dro
        "tabExtra": "#tabs [data-tab=extra]", "pane": "#pane", "issue0": "#pane .issue:first-child", "reveal0": "#pane [data-reveal]",
        "badRow": "#pane tr:has(.bad), #pane tr.bad", "go": "#go", "exportBtn": "#exportBtn", "newBtn": "#newBtn", "footMsg": "#footMsg",
        "lang": "header #lang", "aboutBtn": "#aboutBtn", "chip": "#chip", "toast": "#toast .toast", "modalBox": ".modal .box",
-       "warnb": ".warnb", "closeAbout": "#closeAbout"}
+       "warnb": ".warnb", "closeAbout": "#closeAbout", "verBadge": "#verBadge", "settingsBtn": "#settingsBtn",
+       "opt": ".box .opt", "box": ".modal .box"}
 OK_ONLY = """(() => { const o = onEvent; onEvent = (e) => {
   if (e.type === 'issue') return;
   if (e.type === 'package_done') { const r = e.result; r.issues = []; r.extra = []; r.extra_total = 0; r.ok_files = r.checked; r.clips.forEach(c => { c.status = 'ok'; c.bad = 0; }); }
@@ -46,9 +47,26 @@ async def fresh(b, lang, ack=True):
     init = f"localStorage.setItem('bmc_lang','{lang}');"
     if ack: init += "localStorage.setItem('bmc_ack','1');"
     await page.add_init_script(init)
+    # Recherche de nouvelle version : jamais de vraie requête (hors ligne par défaut).
+    await page.route("https://api.github.com/**", lambda r, *_: r.abort())
     await page.goto(URL)
     await page.add_style_tag(content="#demoTag{display:none!important}")
     return page
+
+async def versions_shots(b, lang, fresh, shot, newer="0.3.0"):
+    """Badge « nouvelle version » et fenêtre de réglages, recherche de version simulée."""
+    page = await fresh(b, lang)
+    async def releases(route, *_):
+        await route.fulfill(status=200, content_type="application/json", headers={"access-control-allow-origin": "*"},
+                            body=json.dumps([{"tag_name": "v" + newer, "draft": False}]))
+    await page.unroute("https://api.github.com/**")
+    await page.route("https://api.github.com/**", releases)
+    await page.evaluate("checkUpdate()")
+    await page.clock.run_for(500)
+    await shot(page, f"update_{lang}")
+    await page.click("#settingsBtn"); await page.clock.run_for(300)
+    await shot(page, f"settings_{lang}")
+    await page.context.close()
 
 async def until(page, js, step=60, limit=4000):
     for _ in range(limit):
@@ -69,6 +87,7 @@ async def main(lang):
         page = await fresh(b, lang); await page.clock.run_for(300); await page.evaluate(OK_ONLY)
         await page.click("#pickFolder"); await page.clock.run_for(1000); await page.click("#go")
         await until(page, "S.phase==='done'"); await page.clock.run_for(300); await shot(page, f"ok_{lang}")
+        await versions_shots(b, lang, fresh, shot)
         await b.close()
 
 OUT.mkdir(exist_ok=True)

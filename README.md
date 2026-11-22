@@ -28,6 +28,8 @@ Go to the **[Releases page](https://github.com/tetsujin28/bandua-mhl-companion/r
 - **Windows**: click "More info", then "Run anyway".
 - **macOS**: double-click the app, then close the blocking message. Open System Settings > Privacy & Security, scroll down to the Security section and click "Open Anyway" next to the app's name, then confirm with your session password (asked only once). If the button does not appear, open Terminal and type `xattr -dr com.apple.quarantine ` followed by the app dragged onto the window.
 
+**New versions.** At startup, the app asks GitHub once whether a newer version exists and, if so, shows it at the top right; one click opens the download page. Nothing installs itself, and nothing else is sent. You can turn this check off in the Settings (the gear).
+
 ## How to use it
 
 1. **Drop the footage folder** onto the window (or choose it, or pick a single `.mhl` file). The app finds every MHL inside, even across several days, cameras and cards.
