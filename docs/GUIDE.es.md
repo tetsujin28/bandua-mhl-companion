@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Bandua MHL Companion, manual de uso</h1>
-<p align="center"><b>Versión 0.1.0 · Windows y macOS</b></p>
+<p align="center"><b>Versión 0.2.0 · Windows y macOS</b></p>
 <p align="center">
   <a href="GUIDE.md">English</a> · <a href="GUIDE.fr.md">Français</a> · <b>Español</b>
 </p>

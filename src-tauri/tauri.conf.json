@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Bandua MHL Companion",
   "mainBinaryName": "bandua-mhl-companion",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.domingoolmomartin.bandua-mhl-companion",
   "build": {
     "frontendDist": "../ui"

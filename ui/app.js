@@ -6,7 +6,7 @@ const DEMO = !TAURI;
 const invoke = DEMO ? null : TAURI.core.invoke;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-let VERSION = "0.1.0"; // remplacé au démarrage par la version de l'application (tauri.conf.json)
+let VERSION = "0.2.0"; // remplacé au démarrage par la version de l'application (tauri.conf.json)
 const SITE = "https://tetsujin28.github.io";
 
 function store(k, v) {
