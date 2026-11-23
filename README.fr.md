@@ -58,16 +58,6 @@ Le **[mode d'emploi détaillé](docs/GUIDE.fr.md)** décrit chaque écran, chaqu
 
 Les clips sont reconnus pour RED (dossiers `.RDC`), ARRI (MXF et séquences ARRIRAW), Blackmagic (BRAW), Sony, Canon, GoPro, DJI et les fichiers vidéo génériques.
 
-## Ligne de commande
-
-Un petit outil en ligne de commande est fourni pour les scripts :
-
-```
-bandua-mhl-check <dossier|fichier.mhl> [--lang fr|en|es] [--report rapport.txt]
-```
-
-Code de sortie : `0` tout est intact, `1` problèmes trouvés, `2` aucun MHL trouvé.
-
 ## Compiler soi-même
 
 Nécessite [Rust](https://rustup.rs) et les [prérequis de Tauri 2](https://tauri.app/start/prerequisites/).

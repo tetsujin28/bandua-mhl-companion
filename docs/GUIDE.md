@@ -184,9 +184,6 @@ Every file is read back in full, from the drive. The time depends on the drive s
 **A file is CORRUPT but the video plays fine. Does it matter?**
 Yes, report it. The file is no longer the one that was shot: the error may be on a frame you have not seen yet, or in the metadata.
 
-**Is there a command-line version?**
-Yes, for scripts: `bandua-mhl-check <folder|file.mhl> [--lang fr|en|es] [--report report.txt]`. Exit code: `0` everything is intact, `1` problems found, `2` no MHL found.
-
 **Does the app send data over the Internet?**
 No. The check and the report happen entirely on your computer. The only connection is the check for new versions at startup, a request to GitHub that sends nothing else; you can turn it off in the Settings.
 

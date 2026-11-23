@@ -58,16 +58,6 @@ The **[full user guide](docs/GUIDE.md)** walks through every screen, every statu
 
 Clips are recognised for RED (`.RDC` folders), ARRI (MXF and ARRIRAW sequences), Blackmagic (BRAW), Sony, Canon, GoPro, DJI and generic video files.
 
-## Command line
-
-A small command line tool is included for scripts:
-
-```
-bandua-mhl-check <folder|file.mhl> [--lang en|fr|es] [--report report.txt]
-```
-
-Exit code: `0` all intact, `1` problems found, `2` no MHL found.
-
 ## Build from source
 
 Requires [Rust](https://rustup.rs) and the [Tauri 2 prerequisites](https://tauri.app/start/prerequisites/).
