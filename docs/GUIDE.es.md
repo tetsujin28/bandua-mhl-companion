@@ -184,9 +184,6 @@ Cada archivo se vuelve a leer entero, desde el disco. El tiempo depende de la ve
 **Un archivo está DAÑADO, pero el vídeo se reproduce bien. ¿Es grave?**
 Sí, hay que avisar. El archivo ya no es el que se rodó: el error puede estar en una imagen que aún no has visto, o en los metadatos.
 
-**¿Existe una versión de línea de comandos?**
-Sí, para scripts: `bandua-mhl-check <carpeta|archivo.mhl> [--lang fr|en|es] [--report informe.txt]`. Código de salida: `0` todo está intacto, `1` se han encontrado problemas, `2` no hay ningún MHL.
-
 **¿La app envía datos por Internet?**
 No. El control y el informe se hacen enteramente en tu ordenador. La única conexión es la búsqueda de nuevas versiones al iniciar, una petición a GitHub que no envía nada más; puedes desactivarla en los Ajustes.
 

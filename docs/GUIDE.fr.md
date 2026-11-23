@@ -184,9 +184,6 @@ Chaque fichier est relu en entier, depuis le disque. La durée dépend de la vit
 **Un fichier est ABÎMÉ, mais la vidéo se lit bien. C'est grave ?**
 Oui, il faut le signaler. Le fichier n'est plus celui qui a été tourné : l'erreur peut se trouver sur une image que vous n'avez pas encore vue, ou dans les métadonnées.
 
-**Existe-t-il une version en ligne de commande ?**
-Oui, pour les scripts : `bandua-mhl-check <dossier|fichier.mhl> [--lang fr|en|es] [--report rapport.txt]`. Code de sortie : `0` tout est intact, `1` problèmes trouvés, `2` aucun MHL trouvé.
-
 **L'app envoie-t-elle des données sur Internet ?**
 Non. Le contrôle et le rapport se font entièrement sur votre ordinateur. La seule connexion est la vérification des nouvelles versions au lancement, une requête à GitHub qui n'envoie rien d'autre ; vous pouvez la désactiver dans les Réglages.
 
